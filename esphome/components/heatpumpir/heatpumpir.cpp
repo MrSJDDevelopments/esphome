@@ -12,7 +12,6 @@ namespace heatpumpir {
 
 static const char *const TAG = "heatpumpir.climate";
 
-ESP_LOGE("inside","send method called");
 const std::map<Protocol, std::function<HeatpumpIR *()>> PROTOCOL_CONSTRUCTOR_MAP = {
     {PROTOCOL_AUX, []() { return new AUXHeatpumpIR(); }},                                    // NOLINT
     {PROTOCOL_BALLU, []() { return new BalluHeatpumpIR(); }},                                // NOLINT
@@ -70,7 +69,6 @@ const std::map<Protocol, std::function<HeatpumpIR *()>> PROTOCOL_CONSTRUCTOR_MAP
     {PROTOCOL_TROTEC3550, []() { return new Trotec3550HeatpumpIR(); }},                      // NOLINT
 };
 
-ESP_LOGE("inside","sendTROTEC3550 called");
 void HeatpumpIRClimate::setup() {
   auto protocol_constructor = PROTOCOL_CONSTRUCTOR_MAP.find(protocol_);
   if (protocol_constructor == PROTOCOL_CONSTRUCTOR_MAP.end()) {
@@ -201,7 +199,7 @@ void HeatpumpIRClimate::transmit_state() {
   }
 
   temperature_cmd = (uint8_t) clamp(this->target_temperature, this->min_temperature_, this->max_temperature_);
-ESP_LOGE(TAG, "About to send something.");
+  ESP_LOGE(TAG, "About to send something.");
   IRSenderESPHome esp_sender(this->transmitter_);
   heatpump_ir_->send(esp_sender, power_mode_cmd, operating_mode_cmd, fan_speed_cmd, temperature_cmd, swing_v_cmd,
                      swing_h_cmd);
