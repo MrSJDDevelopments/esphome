@@ -131,7 +131,7 @@ def to_code(config):
     cg.add_library(
         None,
         None,
-        "https://github.com/MrSJDDevelopments/heatpumpir.git#mrsjd-dev-br5",
+        "https://github.com/MrSJDDevelopments/heatpumpir.git#mrsjd-dev-br6",
     )
     #cg.add_library("https://github.com/MrSJDDevelopments/heatpumpir.git#1.0.30")
     if CORE.is_libretiny:
